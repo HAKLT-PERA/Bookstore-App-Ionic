@@ -1,3 +1,4 @@
+import { ProductService } from './../../../providers/product.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SharedDataService } from 'src/providers/shared-data/shared-data.service';
 import { IonContent, Events } from '@ionic/angular';
@@ -10,9 +11,12 @@ export class Home2Page implements OnInit {
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
   scrollTopButton = false;//for scroll down fab 
+  search = "";
   constructor(
     public shared: SharedDataService,
-    public events: Events, ) {
+    public events: Events, 
+    public product: ProductService,
+    ) {
 
   }
   // For FAB Scroll
@@ -29,8 +33,18 @@ export class Home2Page implements OnInit {
     this.content.scrollToTop(700);
     this.scrollTopButton = false;
   }
+
+  getCartSize(){
+    return this.product.getCartArray().length;
+  }
+
   ngOnInit() {
   }
+
+  onChangeKeyword(event){
+    console.log(this.search);
+  }
+
   ionViewDidEnter() {
     this.shared.hideSplashScreen();
   }

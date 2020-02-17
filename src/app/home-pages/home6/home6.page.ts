@@ -1,3 +1,4 @@
+import { ProductService } from './../../../providers/product.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, Events, IonContent } from '@ionic/angular';
 import { ConfigService } from 'src/providers/config/config.service';
@@ -21,6 +22,7 @@ export class Home6Page implements OnInit {
     public config: ConfigService,
     public events: Events,
     public shared: SharedDataService,
+    public product: ProductService,
   ) {
 
   }
@@ -46,9 +48,11 @@ export class Home6Page implements OnInit {
   }
 
   openCategoryPage() {
-    this.events.publish("openCategoryPage");
+    // this.events.publish("openCategoryPage");
   }
   ngOnInit() {
+   this.product.getProducts();
+
   }
 
 }

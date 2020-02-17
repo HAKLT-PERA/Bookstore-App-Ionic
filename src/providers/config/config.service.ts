@@ -27,7 +27,7 @@ if (localStorage.languageCode == undefined) {
 
 export class ConfigService {
 
-  public url: string = 'http://localhost:3000';
+  public url: string = 'http://a.cp';
   public consumerKey: string = 'your-consumer-key';
   public consumerSecret: string = 'your-consumer-secret';
 

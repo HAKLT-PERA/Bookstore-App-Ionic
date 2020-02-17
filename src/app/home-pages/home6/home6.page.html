@@ -7,13 +7,16 @@
       <ion-img src="assets/logo_header-4.png" alt="logo"></ion-img>
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button fill="clear" routerLink="/search" routerDirection="forward">
+
+      <ion-button fill="clear" routerLink="/home2" routerDirection="forward">
         <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
+
       <ion-button fill="clear" routerLink="/cart" routerDirection="forward">
         <ion-icon name="basket"></ion-icon>
-        <ion-badge color="secondary">{{shared.cartTotalItems()}}</ion-badge>
+        <ion-badge color="secondary">{{this.product.getCartArray().length}}</ion-badge>
       </ion-button>
+
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

@@ -7,7 +7,7 @@
     <ion-buttons slot="end">
       <ion-button fill="clear">
         <ion-icon name="basket"></ion-icon>
-        <ion-badge>{{shared.cartTotalItems()}}</ion-badge>
+        <ion-badge>{{this.productService.getCartArray().length}}</ion-badge>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -36,17 +36,17 @@
     </ion-row>
   </ion-grid>
 
-  <ion-card class="ion-padding" *ngFor="let product of products">
+  <ion-card class="ion-padding" *ngFor="let product of products" >
     <ion-card-header class="ion-no-padding">
       <ion-card-subtitle>
-        <h3> {{product.name}} </h3>
+        <h3> {{product.name + " - " + product.sname}} </h3>
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-grid class="ion-no-padding">
         <ion-row>
           <ion-col size="3">
-            <ion-img src="{{product.image}}"></ion-img>
+            <ion-img src="../../assets/avatar.png"></ion-img>
           </ion-col>
           <ion-col class="col-price" size="5">
             <p>{{'Price' |translate}}</p>
@@ -54,20 +54,18 @@
             <p><b>{{'Sub Total' |translate}}</b></p>
           </ion-col>
           <ion-col class="col-price-ori" size="4">
-            <p class="para-del" [innerHTML]="product.price_html"></p>
+            <p class="para-del">{{product.price}}</p>
             <div class="div-btn">
-              <ion-button size="small" fill="outline" (click)="qunatityMinus(product);"
-                *ngIf="!product.sold_individually">
+              <ion-button size="small" fill="outline" (click)="qunatityMinus(product.id);">
                 <p>-</p>
               </ion-button>
-              <span>{{product.quantity}}</span>
-              <ion-button class="add-btn" size="small" fill="outline" (click)="qunatityPlus(product);"
-                *ngIf="!product.sold_individually">
+              <span>{{getQunatity(product.id)}}</span>
+              <ion-button class="add-btn" size="small" fill="outline" (click)="qunatityPlus(product.id);">
                 <p>+</p>
               </ion-button>
             </div>
             <br /><br />
-            <p class="para-price-ori">{{product.subtotal | curency}}</p>
+            <p class="para-price-ori">{{getQunatity(product.id)*product.price+" LKR"}}</p>
           </ion-col>
         </ion-row>
         <ion-row *ngFor="let att of product.meta_data">
@@ -76,10 +74,10 @@
         </ion-row>
         <ion-row>
           <ion-col size="2.5">
-            <ion-button color="secondary" (click)="getSingleProductDetail(product.product_id)">{{'View' | translate}}</ion-button>
+            <ion-button color="secondary" (click)="getSingleProductDetail(product)">{{'View' | translate}}</ion-button>
           </ion-col>
           <ion-col size="8.5">
-            <ion-button fill="clear" color="danger" (click)="removeCart(product.cart_id);">{{'Remove' | translate}}
+            <ion-button fill="clear" color="danger" (click)="removeCart(product);">{{'Remove' | translate}}
             </ion-button>
           </ion-col>
         </ion-row>
