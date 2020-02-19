@@ -34,9 +34,9 @@ export interface UserCredentials {
   providedIn: "root"
 })
 export class AuthService {
-  public url: string = "http://192.168.8.100:3000";
+  public url: string = "http://192.168.8.101:3000";
   private token: string;
-  // shared object to use in headers to tacle logins in middle of the process
+  // shared object to use in headers to takcle logins in middle of the process
   public user: UserCredentials = {
     phoneNo: undefined,
     password: undefined,

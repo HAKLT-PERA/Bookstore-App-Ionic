@@ -74,6 +74,23 @@
         padding: 5px 8px;
         float: left;
       }
+
+      .product-tag-del {
+        background-color: var(--ion-color-secondary);
+        color: white;
+        padding: 5px 8px;
+        
+        float: left;
+      }
+
+
+      .product-tag-offer {
+        background-color: var(--ion-color-danger);
+        color: white;
+        padding: 5px 8px;
+        text-underline-position: above;
+        float: left;
+      }
     }
 
     .woo-price-group {

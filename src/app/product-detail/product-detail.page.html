@@ -3,24 +3,26 @@
     <ion-buttons slot="start">
       <ion-back-button icon="arrow-round-back"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{product.name}}</ion-title>
+    <ion-title  *ngIf="product" >{{product.name + " "+ product.sname}}</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="product-detail-page">
-  <div class="product-tags-top">
+<ion-content *ngIf="product" class="product-detail-page">
+<!--
+  <div class="product-tags-top" *ngIf = "product">
     <div class="product-tag-new" *ngIf="checkProductNew()">{{'New'|translate}}</div>
     <div class="product-tag-featured" *ngIf="product.featured">{{'Featured'|translate}}</div>
-  </div>
+  </div> 
 
   <div class="icons share-like">
     <ion-icon name="share" (click)="share()"></ion-icon>
     <ion-icon *ngIf="isLiked!=0" name="heart" (click)="clickWishList()"></ion-icon>
     <ion-icon *ngIf="isLiked==0" name="heart-empty" (click)="clickWishList()"></ion-icon>
   </div>
+  -->  
   <ion-slides class="product-slides" pager="true" dir="{{shared.dir}}">
-    <ion-slide *ngFor="let b of product.images">
+    <ion-slide *ngFor="let b of [1,2,3]">
       <div>
-        <img src="{{b.src}}" imageViewer>
+        <img src="../../assets/avatar.png" imageViewer>
       </div>
     </ion-slide>
   </ion-slides>
@@ -28,43 +30,83 @@
   <ion-grid class="product-detail-title">
     <ion-row>
       <div class="product-tags">
-        <div class="product-tag-off" *ngIf="product.on_sale">{{'SALE'|translate}}</div>
+
+       
+          <div class="product-tag-off" *ngIf="product.isStockAvailable">{{product.price + " LKR"}}</div>
+ 
+
+        <div class="product-tag-offer"  *ngIf="discounted()">{{discounted() + " LKR" }}</div>
+
       </div>
-      <!-- 2.0 updates -->
-
-      <ion-col class="woo-price-group" size="12">
-        <span class="woo-price" [innerHTML]="product.price_html"></span>
-        <span class="woo-price" *ngIf="variationPrice!=null">{{'Your Price'|translate}} &nbsp;
-          {{variationPrice|curency}}</span>
-
-        <span class="product-outstock" *ngIf="product.stock_status!='instock'">{{'Out of Stock'|translate}}</span>
-        <span class="product-instock" *ngIf="product.stock_status=='instock'">{{'In Stock'|translate}}&nbsp;
-          <span *ngIf="product.stock_quantity!=null">({{product.stock_quantity}})</span>
-        </span>
-      </ion-col>
-
-      <ion-col class="product-title" size="12">
-        <h3>{{product.name}}
-          <br>
-          <small *ngFor="let b of product.categories">{{b.name}}&nbsp;</small>
-        </h3>
-        <ion-spinner *ngIf="ratingStarsValue==null"></ion-spinner>
+      
+      <ion-col class="product-title" size="20">
+       <!--<ion-spinner *ngIf="product.averageRating==-1"></ion-spinner>--> 
+         <h2> {{product.name + " - "+ product.sname}} </h2>
+         <h3 *ngIf='product.originalBookName!=null'> {{" (Based on "+ product.originalBookName +' )'}} </h3>
         <div class="product-ratings">
-          <ion-row class="product-rating animate" *ngIf="product.reviews_allowed && ratingStarsValue!=null"
-            (click)="openReviewsPage()">
-            <div class="stars-outer">
-              <div class="stars-inner" [style.width]="ratingStarsValue+'%'"></div>
-            </div>
-            <ion-col size="7">
-              <h6>{{reviews.length}}&nbsp;{{'rating and review'|translate}}</h6>
-            </ion-col>
+          <ion-row class="product-rating animate" (click)="openReviewsPage()">
+          <ion-icon (click)="clickWishList()" *ngIf="product.averageRating>0" name="star"></ion-icon>
+          <ion-icon (click)="clickWishList()" *ngIf="product.averageRating>1" name="star"></ion-icon>
+          <ion-icon (click)="clickWishList()" *ngIf="product.averageRating>2" name="star"></ion-icon>
+          <ion-icon (click)="clickWishList()" *ngIf="product.averageRating>3" name="star"></ion-icon>
+          <ion-icon (click)="clickWishList()" *ngIf="product.averageRating>4" name="star"></ion-icon>
+          <ion-icon (click)="clickWishList()" *ngIf="product.averageRating>5" name="star"></ion-icon>
+
+          <ion-icon (click)="clickWishList()" *ngIf="product.averageRating<=0" name="star-outline"></ion-icon>
+          <ion-icon (click)="clickWishList()" *ngIf="product.averageRating<=1" name="star-outline"></ion-icon>
+          <ion-icon (click)="clickWishList()" *ngIf="product.averageRating<=2" name="star-outline"></ion-icon>
+          <ion-icon (click)="clickWishList()" *ngIf="product.averageRating<=3" name="star-outline"></ion-icon>
+          <ion-icon (click)="clickWishList()" *ngIf="product.averageRating<=4" name="star-outline"></ion-icon>
+          <ion-icon (click)="clickWishList()" *ngIf="product.averageRating<=5" name="star-outline"></ion-icon>
           </ion-row>
         </div>
-        <!-- <p style="display:none;">{{'Total Sales'|translate}}&nbsp;({{product.total_sales}})</p> -->
       </ion-col>
     </ion-row>
   </ion-grid>
 
+    <ion-grid class="product-detail-header" *ngIf="product.type!='grouped'">
+    <ion-row>
+      <ion-col class="ion-align-items-center" size="3">
+        Author:
+      </ion-col>
+         <ion-col class="ion-align-items-center" size="9">
+        {{product.author}}
+      </ion-col>
+      
+      <ion-col class="ion-align-items-center" size="3">
+        Publisher:
+      </ion-col>
+      <ion-col class="ion-align-items-center" size="9">
+        {{product.publisher}}
+      </ion-col>
+
+       <ion-col class="ion-align-items-center" size="3">
+        Year:
+      </ion-col>
+      <ion-col class="ion-align-items-center" size="9">
+        {{product.year}}
+      </ion-col>
+
+       <ion-col class="ion-align-items-center" size="3">
+        Category:
+      </ion-col>
+      <ion-col class="ion-align-items-center" size="9">
+        {{product.category}}
+      </ion-col>
+      
+      <ion-col class="ion-align-items-center" size="3">
+        Description:
+      </ion-col>
+      <ion-col class="ion-align-items-center" size="9">
+        {{product.description}}
+      </ion-col>
+
+    </ion-row>
+    </ion-grid>
+
+
+
+<!--
   <ion-grid class="product-detail-header" *ngIf="product.type!='grouped'">
     <ion-row>
       <ion-col class="left" size="6">
@@ -81,7 +123,7 @@
             </ion-input>
           </ion-col>
           <ion-col size="3" class="qty-vlue">
-            <!-- <span class="dgi">{{quantity}}</span> -->
+           
             <ion-button size="small" color="secondary" (click)="qunatityPlus(product,quantity);"
               *ngIf="!product.sold_individually">
               <ion-icon name="add"></ion-icon>
@@ -204,7 +246,7 @@
         </ion-item>
       </div>
     </ion-list>
-    <!-- <ion-list>
+    
       <ion-radio-group *ngFor=" let att of attributes; let ind = index" [(ngModel)]="att.value">
         <div *ngIf="false">
           <ion-list-header>
@@ -222,7 +264,7 @@
           </ion-row>
         </div>
       </ion-radio-group>
-    </ion-list> -->
+    </ion-list> 
 
     <ion-row>
       <ion-col>
@@ -312,7 +354,10 @@
     </ion-fab-button>
   </ion-fab>
 
+ -->
 </ion-content>
+
+ <!--
 <ion-footer class="product-detail-footer">
   <ion-button expand="full" color="secondary" [disabled]="disableCartButton" *ngIf="product.type!='external'"
     (click)="addToCartProduct()">
@@ -322,3 +367,4 @@
     (click)="openProduct()">
     {{product.button_text|translate}}</ion-button>
 </ion-footer>
+-->

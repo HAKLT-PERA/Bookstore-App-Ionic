@@ -28,14 +28,19 @@ export class ProductService {
     // });
     
     Object.entries(this.cart).forEach(ent=>{
-      console.log(ent);
+      //console.log(ent);
       if (ent[1]){
         result.push(this.cartArray[ent[0]]);
       }
     })
 
-    console.log(result);
+    //console.log(result);
     return result;
+  }
+
+  public calculatePrice(price, rate)  {
+    console.log(price - (price * rate / 100))
+    return price - (price * rate / 100);
   }
 
   public addToWishList(item: any): void {
@@ -79,6 +84,12 @@ export class ProductService {
     return false;
   }
 
+  public getBookDetails(id){
+
+    return this.auth.request("post", "getBookDetails", false, { id:id });
+
+  }
+
   public removeFromCartList(item): void {
     this.cart[item.id] = false;
     this.cartArray[item.id] = null;
@@ -89,7 +100,7 @@ export class ProductService {
     this.auth.request("post", "getBookList", false, {}).subscribe(
       data => {
         if (data) {
-          console.log(data);
+          //console.log(data);
           this.products = data;
         }
       },

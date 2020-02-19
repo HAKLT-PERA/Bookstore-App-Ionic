@@ -72,7 +72,7 @@ export class ProductComponent implements OnInit {
   showProductDetail() {
     this.shared.singleProductPageData.push(this.p);
     this.navCtrl.navigateForward("product-detail/" + this.p.id);
-
+    console.log('Product ID:'+ this.p.id)
     if (this.type != "recent") {
       this.shared.addToRecent(this.p);
     }
