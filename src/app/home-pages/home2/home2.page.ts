@@ -11,7 +11,7 @@ export class Home2Page implements OnInit {
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
   scrollTopButton = false;//for scroll down fab 
-  search = "";
+  search = '';
   constructor(
     public shared: SharedDataService,
     public events: Events, 
@@ -43,6 +43,9 @@ export class Home2Page implements OnInit {
 
   onChangeKeyword(event){
     console.log(this.search);
+    this.product.searchResult = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    this.product.searchProduct();
+    this.product.searchKey = this.search;
   }
 
   ionViewDidEnter() {

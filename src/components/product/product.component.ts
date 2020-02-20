@@ -78,6 +78,10 @@ export class ProductComponent implements OnInit {
     }
   }
 
+  discountPrice(){
+    return this.product.calculatePrice(this.p.price, this.p.discount)
+  }
+
   checkProductNew() {
     var pDate = new Date(this.p.date_created);
     var date = pDate.getTime() + this.config.newProductDuration * 86400000;

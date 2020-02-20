@@ -54,7 +54,7 @@
     padding-bottom: 0;
 
     .product-tags {
-      position: absolute;
+      // position: absolute;
       left: 10px;
       top: -15px;
       z-index: 9;
@@ -76,17 +76,19 @@
       }
 
       .product-tag-del {
-        background-color: var(--ion-color-secondary);
-        color: white;
-        padding: 5px 8px;
+        // background: linear-gradient(to left top , transparent 47.75%, currentColor 49.5%, currentColor 50.5%, transparent 52.25%);
+        // background-color: grey;
         
+        color: rgb(46, 46, 46);
+        padding: 5px 8px;
         float: left;
+        text-decoration: line-through;
       }
-
-
+  
       .product-tag-offer {
-        background-color: var(--ion-color-danger);
-        color: white;
+        // background-color: var(--ion-color-danger);
+        color: red;
+        font-weight: bold;
         padding: 5px 8px;
         text-underline-position: above;
         float: left;
@@ -173,7 +175,7 @@
     }
     ion-icon {
       font-size: 28px;
-      color: gray;
+      color: rgb(255, 136, 0);
     }
     h6 {
       margin-bottom: 6px;

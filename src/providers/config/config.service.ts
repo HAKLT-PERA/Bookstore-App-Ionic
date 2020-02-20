@@ -12,7 +12,6 @@ import { HTTP } from '@ionic-native/http/ngx';
 
 
 
-declare var WooCommerceAPI: any;
 if (localStorage.languageCode == undefined) {
   localStorage.languageCode = "en"; //default language code
   localStorage.languageDirection = "ltr"; //default language direction of app
@@ -57,14 +56,14 @@ export class ConfigService {
   public currency = localStorage.currency;
   public productsArguments = "lang=" + localStorage.languageCode + "&currency=" + localStorage.currencyCode;//additional product arguments for query
 
-  Woocommerce = WooCommerceAPI.WooCommerceAPI({
-    url: this.url,
-    consumerKey: this.consumerKey,
-    consumerSecret: this.consumerSecret,
-    wpAPI: true,
-    queryStringAuth: true,
-    version: 'wc/v3'
-  });
+  // Woocommerce = WooCommerceAPI.WooCommerceAPI({
+  //   url: this.url,
+  //   consumerKey: this.consumerKey,
+  //   consumerSecret: this.consumerSecret,
+  //   wpAPI: true,
+  //   queryStringAuth: true,
+  //   version: 'wc/v3'
+  // });
 
   public urlExt: string = this.url + "/wp-json/woo_app_connect/mobile/";
   public langId: string = "1";

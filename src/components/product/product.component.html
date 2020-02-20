@@ -19,48 +19,47 @@
       <p (click)="showProductDetail()">{{p.name + ' - ' + p.sname}}</p>
       <ion-grid class="ion-no-padding">
 
-        <ion-row class="ion-no-padding">
-          <ion-col size="10" class="ion-no-padding">
-            <p>{{p.price}}</p>
+        <ion-row class="ion-text-center">
+
+          <ion-col size="4" class=" product-tag-del ">
+            <p>{{p.price + "LKR "}}</p>
           </ion-col>
 
-          
-        
-          <ion-col size="2"  class="ion-text-center ion-no-padding">
+          <ion-col size="8"  class="product-tag-featured ">
+            <p>{{discountPrice() + "LKR" + "(" + p.discount + "% off)"}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-text-center" >
+          <ion-col size="10"  class="ion-text-center">
+            <ion-icon class = "star-icon" (click)="clickWishList()" *ngIf="p.averageRating>0" name="star"></ion-icon>
+            <ion-icon class = "star-icon"  (click)="clickWishList()" *ngIf="p.averageRating>1" name="star"></ion-icon>
+            <ion-icon class = "star-icon" (click)="clickWishList()" *ngIf="p.averageRating>2" name="star"></ion-icon>
+            <ion-icon class = "star-icon" (click)="clickWishList()" *ngIf="p.averageRating>3" name="star"></ion-icon>
+            <ion-icon class = "star-icon" (click)="clickWishList()" *ngIf="p.averageRating>4" name="star"></ion-icon>
+            <ion-icon class = "star-icon" (click)="clickWishList()" *ngIf="p.averageRating>5" name="star"></ion-icon>
+
+            <ion-icon class = "star-icon" (click)="clickWishList()" *ngIf="p.averageRating<=0" name="star-outline"></ion-icon>
+            <ion-icon class = "star-icon"  (click)="clickWishList()" *ngIf="p.averageRating<=1" name="star-outline"></ion-icon>
+            <ion-icon class = "star-icon"  (click)="clickWishList()" *ngIf="p.averageRating<=2" name="star-outline"></ion-icon>
+            <ion-icon class = "star-icon"  (click)="clickWishList()" *ngIf="p.averageRating<=3" name="star-outline"></ion-icon>
+            <ion-icon class = "star-icon"  (click)="clickWishList()" *ngIf="p.averageRating<=4" name="star-outline"></ion-icon>
+            <ion-icon class = "star-icon"  (click)="clickWishList()" *ngIf="p.averageRating<=5" name="star-outline"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-text-center">
+
+          <ion-col class="ion-text-center " size="5"  >
+              <ion-icon *ngIf="!this.product.checkCartList(p)" color="secondary" (click)="addToCart(p);" name="basket"></ion-icon>
+              <ion-icon  color="danger" *ngIf="this.product.checkCartList(p)" (click)="removeCart(p)" name="basket"></ion-icon>
+          </ion-col>
+          <ion-col size="5"  class="ion-text-center ">
             <ion-icon (click)="clickWishList()" *ngIf="isLiked==0" name="heart-empty"></ion-icon>
             <ion-icon (click)="clickWishList()" *ngIf="isLiked!=0" name="heart"></ion-icon>
           </ion-col>
 
         </ion-row>
-
-        <ion-col size="2"  class="ion-text-center">
-          <ion-icon (click)="clickWishList()" *ngIf="p.averageRating>0" name="star"></ion-icon>
-          <ion-icon (click)="clickWishList()" *ngIf="p.averageRating>1" name="star"></ion-icon>
-          <ion-icon (click)="clickWishList()" *ngIf="p.averageRating>2" name="star"></ion-icon>
-          <ion-icon (click)="clickWishList()" *ngIf="p.averageRating>3" name="star"></ion-icon>
-          <ion-icon (click)="clickWishList()" *ngIf="p.averageRating>4" name="star"></ion-icon>
-          <ion-icon (click)="clickWishList()" *ngIf="p.averageRating>5" name="star"></ion-icon>
-
-          <ion-icon (click)="clickWishList()" *ngIf="p.averageRating<=0" name="star-outline"></ion-icon>
-          <ion-icon (click)="clickWishList()" *ngIf="p.averageRating<=1" name="star-outline"></ion-icon>
-          <ion-icon (click)="clickWishList()" *ngIf="p.averageRating<=2" name="star-outline"></ion-icon>
-          <ion-icon (click)="clickWishList()" *ngIf="p.averageRating<=3" name="star-outline"></ion-icon>
-          <ion-icon (click)="clickWishList()" *ngIf="p.averageRating<=4" name="star-outline"></ion-icon>
-          <ion-icon (click)="clickWishList()" *ngIf="p.averageRating<=5" name="star-outline"></ion-icon>
-
-
-          
-       </ion-col>
-
-          <ion-row class="ion-text-center" *ngIf="!this.product.checkCartList(p)">
-              <ion-icon color="secondary" (click)="addToCart(p);" name="basket"></ion-icon>
-            </ion-row>
-          
-
-            <ion-row class="ion-text-center" *ngIf="this.product.checkCartList(p)">
-              <ion-icon  color="danger" (click)="removeCart(p)" name="basket"></ion-icon>
-            </ion-row>
- 
 
       </ion-grid>
       <ion-row class="card-add-cart" *ngIf="false" (click)="this.product.removeFromCartList(this.p)">

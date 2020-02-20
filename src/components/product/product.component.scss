@@ -91,10 +91,31 @@
             }
           }
         }
+
+        .product-tag-featured {
+          // background-color: var(--ion-color-danger);
+          // color:green($color: #000000);
+          padding: 1px 1px;
+          float: center;
+          color: white;
+          
+        }
+  
+        .product-tag-del {
+          background: linear-gradient(to left top , transparent 47.75%, red 49.5%, red 50.5%, transparent 52.25%);
+          // background-color: grey;
+          color: white;
+          padding: 1px 1px;
+          float: center;
+        }
+
         ion-icon {
-          font-size: 17px;
+          font-size: 25px;
           color: var(--ion-color-secondary);
           //padding-top: 4px;
+        }
+        .star-icon{
+          font-size: 15px;
         }
         ion-button {
           width: 100%;

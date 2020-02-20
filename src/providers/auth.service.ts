@@ -117,7 +117,9 @@ export class AuthService {
     url: string,
     isSecure: boolean,
     obj?: any
+
   ): Observable<any> {
+    console.log(obj);
     let base;
     if (method === "post") {
       if (isSecure) {

@@ -7,11 +7,12 @@ import { Observable } from "rxjs";
 })
 export class ProductService {
   constructor(private auth: AuthService) {}
+  public searchResult = [];
   public products = [];
   public wishList = [];
   public cart = {};
   public cartArray = {};
- 
+  public searchKey = '';
 
 
 
@@ -106,6 +107,22 @@ export class ProductService {
       },
       err => {}
     );
+  }
+
+  public searchProduct(){
+    this.auth.request("post", "getBookList", false, {searchText: this.searchKey}).subscribe(data=>{
+      this.searchResult = data;
+      if (this.searchResult.length ==0 ){
+        this.searchResult = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+      }
+      console.log(data);
+    });
+  }
+
+  public filteredProduct(key){
+    this.auth.request("post", "getBookList", false, {searchText: key}).subscribe(data=>{
+      return data;
+    });
   }
 
   public getLoadedProduct() {

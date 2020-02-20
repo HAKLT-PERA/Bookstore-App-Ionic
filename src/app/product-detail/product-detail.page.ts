@@ -93,6 +93,9 @@ export class ProductDetailPage implements OnInit {
     }
     return (this.prod.calculatePrice(this.product.price, this.product.discount))
   }
+  rate(val){
+    
+  }
 
   getProductData(id) {
     // let p;
